@@ -219,7 +219,7 @@ def calculate_MPI_fields():
     # Calculate the MPI and SST - NOTE: THIS PART TAKES VERY LOOONG
     # =============================================================================
     data=xr.open_dataset(os.path.join(__location__,'Monthly_mean_SST.nc'))
-    
+     
     lon=data.longitude.values
     lat=data.latitude.values
     data.close()
@@ -234,13 +234,21 @@ def calculate_MPI_fields():
     intensity_list={i:[] for i in range(0,6)}
     pressure_drop_list={i:[] for i in range(0,6)}
     
+    MSLP_field_all={i:[] for i in range(1,13)}
+    SST_field_all={i:[] for i in range(1,13)}
+    
+    for month in range(1,13):
+        MSLP_field_all=np.loadtxt(os.path.join(__location__,'Monthly_mean_MSLP_'+str(month)+'.txt'))
+        SST_field_all=np.loadtxt(os.path.join(__location__,'Monthly_mean_SST_'+str(month)+'.txt'))
+    
     for i in range(len(latlist)):
         if len(preslist[i])>0:
             idx=basinlist[i][0]
             month=monthlist[i][0]
             
-            SST_field=np.loadtxt(os.path.join(__location__,'Monthly_mean_SST_'+str(month)+'.txt'))
-            MSLP_field=np.loadtxt(os.path.join(__location__,'Monthly_mean_MSLP_'+str(month)+'.txt'))
+            SST_field=SST_field_all[month]
+            MSLP_field=MSLP_field_all[month]
+            
             for j in range(len(preslist[i])):
                 lat_index=np.abs(lat-latlist[i][j]).argmin()
                 lon_index=np.abs(lon-lonlist[i][j]).argmin()
@@ -316,8 +324,8 @@ def calculate_MPI_fields():
         for m,midx in zip(months[idx],range(len(months[idx]))):
             [A,B,C]=coeflist[idx][m]    
         
-            SST= np.loadtxt(os.path.join(__location__,'Monthly_mean_SST_'+str(m)+'.txt'))
-            MSLP=np.loadtxt(os.path.join(__location__,'Monthly_mean_MSLP_'+str(m)+'.txt'))
+            SST=SST_field_all[m]
+            MSLP=MSLP_field_all[m]
             
             lat0,lat1,lon0,lon1=preprocessing.BOUNDARIES_BASINS(idx)
     
@@ -388,7 +396,7 @@ def pressure_coefficients():
     months=[[6,7,8,9,10,11],[6,7,8,9,10,11],[4,5,6,10,10,11],[1,2,3,4,11,12],[1,2,3,4,11,12],[5,6,7,8,9,10,11]]
     
     months_for_coef=[[6,7,8,9,10,11],[6,7,8,9,10,11],[4,5,6,9,10,11],[1,2,3,4,11,12],[1,2,3,4,11,12],[5,6,7,8,9,10,11]]
-    
+        
     for idx in range(0,6):
         coeflist[idx]={i:[] for i in months_for_coef[idx]}
         
