@@ -367,7 +367,7 @@ def TC_variables():
                 dp0_pos.append(pressure[0][idx][j])
         
         pneg=np.percentile(dp0_neg,1)
-        ppos=np.percentile(dp0_pos,1)
+        ppos=np.percentile(dp0_pos,99)
         
         for month in monthsall[idx]:
             dplist=[v for v in genesis_dpres[idx][month] if np.isnan(v)==False and v>-1000.]
