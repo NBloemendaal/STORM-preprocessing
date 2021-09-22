@@ -238,8 +238,8 @@ def calculate_MPI_fields():
     SST_field_all={i:[] for i in range(1,13)}
     
     for month in range(1,13):
-        MSLP_field_all=np.loadtxt(os.path.join(__location__,'Monthly_mean_MSLP_'+str(month)+'.txt'))
-        SST_field_all=np.loadtxt(os.path.join(__location__,'Monthly_mean_SST_'+str(month)+'.txt'))
+        MSLP_field_all[month]=np.loadtxt(os.path.join(__location__,'Monthly_mean_MSLP_'+str(month)+'.txt'))
+        SST_field_all[month]=np.loadtxt(os.path.join(__location__,'Monthly_mean_SST_'+str(month)+'.txt'))
     
     for i in range(len(latlist)):
         if len(preslist[i])>0:
