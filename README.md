@@ -1,6 +1,7 @@
 # STORM-preprocessing
 These are the scripts to conduct the data-preprocessing for the STORM model. Input data is taken from IBTrACS, see https://www.ncdc.noaa.gov/ibtracs/. 
-Please reach out if you have any questions!
+
+**IMPORTANT: Please be aware that these scripts are not maintained and NO support is provided!!**
 
 Please run the scripts as follows:
 
