@@ -440,7 +440,7 @@ def pressure_coefficients():
             if idx==1:
                 matrix_mpi=np.c_[matrix_mpi,matrix_mpi[:,-1]]        
                     
-            df_data=pd.DataFrame({'Latitude':pres_variables[3][idx],'Longitude':pres_variables[4][idx],'Pressure':pres_variables[3][idx],'DP0':pres_variables[0][idx],'DP1':pres_variables[1][idx],'Month':pres_variables[5][idx]})
+            df_data=pd.DataFrame({'Latitude':pres_variables[3][idx],'Longitude':pres_variables[4][idx],'Pressure':pres_variables[2][idx],'DP0':pres_variables[0][idx],'DP1':pres_variables[1][idx],'Month':pres_variables[5][idx]})
             df_data=df_data[(df_data['Pressure']>0.) & (df_data['DP0']>-10000.) & (df_data['DP1']>-10000.) & (df_data['Longitude']>=lon0) &(df_data['Longitude']<lon11) & (df_data["Latitude"]>=lat0) & (df_data["Latitude"]<lat1)]
             df_data1=df_data[df_data["Month"]==m]
             
